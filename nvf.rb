@@ -6,7 +6,7 @@ require 'erb'
 @base_name = 'arpwatcher'
 @nboxes = 3
 
-f = 'templates/Vagrantfile.erb'
+f = File.join(ENV['HOME'], 'local/share/nvf/templates/Vagrantfile.erb')
 template = ERB.new(File.read(f), nil, '-')
 
 puts template.result
