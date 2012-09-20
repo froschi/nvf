@@ -29,9 +29,9 @@ Vagrant::Config.run do |config|
       box.vm.customize ["modifyvm", :id, "--cpus", 2]
       box.vm.customize ["modifyvm", :id, "--name", name]
 
-      # Disable vbguest
-      box.vbguest.auto_update = false
-      box.vbguest.no_remote = true
+#      # Disable vbguest
+#      box.vbguest.auto_update = false
+#      box.vbguest.no_remote = true
 
       # Networking, in addition to the bridged interface
       box.vm.network :hostonly, options[:ip]
