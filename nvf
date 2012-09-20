@@ -4,7 +4,12 @@ require 'erb'
 
 @default_box_url = "/home/thorsten/.vagrant.d/boxes/baseline.box"
 @base_name = File.basename(Dir.getwd)
-@nboxes = 3
+
+if ARGV[0].to_i > 0 then
+  @nboxes = ARGV[0].to_i
+else
+  @nboxes = 1
+end
 
 if File.exists?('Vagrantfile') then
   puts("[-] Vagrantfile exists, won't overwrite.")
