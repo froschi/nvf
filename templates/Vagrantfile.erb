@@ -38,15 +38,15 @@ Vagrant::Config.run do |config|
       # Networking, in addition to the bridged interface
       box.vm.network :hostonly, options[:ip]
 
-#      # Provisioning
-#      box.vm.provision :chef_solo do |chef|
-#        chef.cookbooks_path = "cookbooks"
-#        chef.add_recipe("prerequisites")
-#
+      # Provisioning
+      box.vm.provision :chef_solo do |chef|
+        chef.cookbooks_path = "cookbooks"
+        chef.add_recipe("prerequisites")
+
 #        chef.json = {
 #          :stuff => name
 #        }
-#      end
+      end
     end
 
   end
