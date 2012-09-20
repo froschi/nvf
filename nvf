@@ -14,5 +14,8 @@ end
 f = File.join(ENV['HOME'], 'local/share/nvf/templates/Vagrantfile.erb')
 template = ERB.new(File.read(f), nil, '-')
 
+File.open('Vagrantfile', 'w') do |f|
+  f.write(template.result)
+  puts("[+] Vagrantfile written.")
+end
 
-template.result
