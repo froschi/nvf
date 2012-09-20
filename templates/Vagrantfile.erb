@@ -1,6 +1,6 @@
 default_box_url = "<%= @default_box_url %>"
 
-# JSON host definitions
+# Configuration data
 <%= @base_name -%>_boxes = {
 <% for @n in 1.upto(@nboxes) -%>
   :<%= "#{@base_name}#{@n}" %> => {
