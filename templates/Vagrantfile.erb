@@ -40,7 +40,7 @@ Vagrant::Config.run do |config|
 
       # Provisioning
       box.vm.provision :chef_solo do |chef|
-        chef.cookbooks_path = "cookbooks"
+        chef.cookbooks_path = "../cookbooks"
         chef.add_recipe("prerequisites")
 
 #        chef.json = {
