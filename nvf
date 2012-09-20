@@ -6,7 +6,13 @@ require 'erb'
 @base_name = File.basename(Dir.getwd)
 @nboxes = 3
 
+if File.exists?('Vagrantfile') then
+  puts("[-] Vagrantfile exists, won't overwrite.")
+  exit 1
+end
+
 f = File.join(ENV['HOME'], 'local/share/nvf/templates/Vagrantfile.erb')
 template = ERB.new(File.read(f), nil, '-')
 
-puts template.result
+
+template.result
