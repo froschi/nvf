@@ -36,7 +36,7 @@ Vagrant::Config.run do |config|
       box.vm.customize ["modifyvm", :id, "--name", name]
 
       # Directories
-      config.vm.share_folder "archives", "/var/cache/apt/archivesh", "../archives"
+      config.vm.share_folder "archives", "/var/cache/apt/archives", "../archives"
 
 #      # Disable vbguest
 #      box.vbguest.auto_update = false
