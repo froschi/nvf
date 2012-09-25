@@ -33,7 +33,7 @@ Vagrant::Config.run do |config|
       #box.vm.boot_mode = :gui
 
       # Hardware configuration
-      box.vm.customize ["modifyvm", :id, "--memory", 384]
+      box.vm.customize ["modifyvm", :id, "--memory", 256]
       box.vm.customize ["modifyvm", :id, "--cpus", 2]
       box.vm.customize ["modifyvm", :id, "--name", name]
 
