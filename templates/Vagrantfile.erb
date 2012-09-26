@@ -50,6 +50,8 @@ Vagrant::Config.run do |config|
       # Provisioning
       box.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = "../cookbooks"
+        chef.data_bags_path = "../data_bags"
+        chef.roles_path = "../roles"
 
         cookbooks = []
         cookbooks |= common_cookbooks
