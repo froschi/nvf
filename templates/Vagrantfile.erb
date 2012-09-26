@@ -11,10 +11,10 @@ common_cookbooks = %w/
   :<%= "#{@base_name}#{@n}" %> => {
     :url => default_box_url,
     :ip => "<%= "192.168.15.#{@n + 1}" %>",
-    :roles => [
-    ],
-    :cookbooks => [
-    ],
+    :roles => %w/
+    /,
+    :cookbooks => %w/
+    /,
   },
 <% end -%>
 }
