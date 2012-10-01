@@ -16,11 +16,24 @@ if File.exists?('Vagrantfile') then
   exit 1
 end
 
+if File.exists?('Gemfile') then
+  puts("[-] Gemfile exists, won't overwrite.")
+  exit 1
+end
+
 f = File.join(ENV['HOME'], 'local/share/nvf/templates/Vagrantfile.erb')
 template = ERB.new(File.read(f), nil, '-')
 
 File.open('Vagrantfile', 'w') do |f|
   f.write(template.result)
   puts("[+] Vagrantfile written.")
+end
+
+f = File.join(ENV['HOME'], 'local/share/nvf/templates/Gemfile.erb')
+template = ERB.new(File.read(f), nil, '-')
+
+File.open('Gemfile', 'w') do |f|
+  f.write(template.result)
+  puts("[+] Gemfile written.")
 end
 
