@@ -43,6 +43,9 @@ Vagrant::Config.run do |config|
       # Networking, in addition to the bridged interface
       box.vm.network :hostonly, options[:ip]
 
+#      # Some port forwarding
+#      box.vm.forward_port 8080, 8081
+
       # Provisioning
       box.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = "../cookbooks"
