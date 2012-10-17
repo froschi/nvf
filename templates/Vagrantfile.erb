@@ -3,14 +3,17 @@ default_box_url = "<%= @default_box_url %>"
 # Configuration data
 common_roles = []
 common_cookbooks = %w/prerequisites/
+common_ports = []
 
 <%= @base_name -%>_boxes = {
 <% for @n in 1.upto(@nboxes) -%>
   :<%= "#{@base_name}#{@n}" %> => {
+    :id => <%= @n %>,
     :url => default_box_url,
     :ip => "<%= "192.168.15.#{@n + 1}" %>",
     :roles => %w//,
     :cookbooks => %w//,
+    :ports => [],
   },
 <% end -%>
 }
@@ -45,6 +48,13 @@ Vagrant::Config.run do |config|
 
 #      # Some port forwarding
 #      box.vm.forward_port 8080, 8081
+
+      ports = []
+      ports |= common_ports
+      ports |= options[:ports]
+      ports.each do |port|
+        box.vm.forward_port port, port + options[:id]
+      end
 
       # Provisioning
       box.vm.provision :chef_solo do |chef|
