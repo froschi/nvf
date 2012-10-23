@@ -55,7 +55,11 @@ Vagrant::Config.run do |config|
       ports |= setup[:ports]
       ports |= options[:ports]
       ports.each do |port|
-        box.vm.forward_port port, port + options[:id]
+        if port > 1024
+          box.vm.forward_port port, port + options[:id]
+        else
+          box.vm.forward_port port, port + options[:id] + 1024
+        end
       end
 
       # Provisioning
