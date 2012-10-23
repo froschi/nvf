@@ -1,9 +1,11 @@
 default_box_url = "<%= @default_box_url %>"
 
 # Configuration data
-common_roles = []
-common_cookbooks = %w/prerequisites/
-common_ports = []
+config = {
+  :roles = []
+  :cookbooks = %w/prerequisites/
+  :ports = []
+}
 
 <%= @base_name -%>_boxes = {
 <% for @n in 1.upto(@nboxes) -%>
@@ -50,7 +52,7 @@ Vagrant::Config.run do |config|
 #      box.vm.forward_port 8080, 8081
 
       ports = []
-      ports |= common_ports
+      ports |= config[:ports]
       ports |= options[:ports]
       ports.each do |port|
         box.vm.forward_port port, port + options[:id]
@@ -63,7 +65,7 @@ Vagrant::Config.run do |config|
         chef.roles_path = "../roles"
 
         cookbooks = []
-        cookbooks |= common_cookbooks
+        cookbooks |= config[:cookbooks]
         cookbooks |= options[:cookbooks]
         cookbooks.each do |cookbook|
           chef.add_recipe(cookbook)
