@@ -2,11 +2,13 @@ default_box_url = "<%= @default_box_url %>"
 
 # Configuration data
 setup = {
+  :data_bags_path => File.join(Dir.getwd, "../data_bags"),
   :roles => [],
   :cookbooks => %w/prerequisites/,
   :ports => []
 }
 
+# Per-host data
 <%= @base_name -%>_boxes = {
 <% for @n in 1.upto(@nboxes) -%>
   :<%= "#{@base_name}#{@n}" %> => {
@@ -25,6 +27,19 @@ Vagrant::Config.run do |config|
   <%= @base_name -%>_boxes.each_pair do |name, options|
 
     config.vm.define name do |box|
+      require 'json'
+
+      # Try to read overriding data from data bags
+      # TODO: merge stuff into options array. problems: normalize keys, symbolize keys.
+      j = {}
+      json_file = File.join(setup[:data_bags_path], "hosts", "#{name.to_s}.json")
+      if File.exists?(json_file) then
+        begin
+          j = JSON::parse(IO.read(json_file))
+        rescue JSON::ParserError
+        end
+      end
+
       # Some metadata
       box.vm.box = name.to_s
       box.vm.host_name = name.to_s
@@ -65,7 +80,7 @@ Vagrant::Config.run do |config|
       # Provisioning
       box.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = ["../cookbooks/local", "../cookbooks/github.com/froschi"]
-        chef.data_bags_path = "../data_bags"
+        chef.data_bags_path = setup[:data_bags_path]
         chef.roles_path = "../roles"
 
         cookbooks = []
