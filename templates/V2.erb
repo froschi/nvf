@@ -1,0 +1,8 @@
+box_url = "/home/thorsten/.vagrant.d/boxes/ubuntu-trusty-amd64-20140521.box"
+
+Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |v|
+    v.gui = false
+  end
+  config.vm.box_url = box_url
+end
