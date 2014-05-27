@@ -1,8 +1,21 @@
 box_url = "/home/thorsten/.vagrant.d/boxes/ubuntu-trusty-amd64-20140521.box"
 
+name = File.basename(Dir.pwd)
+chef_recipes = %w/prerequisites/
+
 Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |v|
     v.gui = false
   end
-  config.vm.box_url = box_url
+  config.vm.define name do |c|
+    c.vm.box = name
+    c.vm.hostname = name
+    c.vm.box_url = box_url
+  end
+  config.vm.provision "chef_solo" do |chef|
+    chef.cookbooks_path = ["../cookbooks/local/"]
+    chef_recipes.each do |recipe|
+      chef.add_recipe recipe
+    end
+  end
 end
