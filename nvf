@@ -23,6 +23,3 @@ File.open('Vagrantfile', 'w') do |f|
   f.write(template.result)
   puts("[+] Vagrantfile written.")
 end
-
-f = File.join(ENV['HOME'], 'local/share/nvf/templates/Gemfile.erb')
-template = ERB.new(File.read(f), nil, '-')
