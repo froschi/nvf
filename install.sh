@@ -4,4 +4,3 @@
 
 cp nvf $HOME/local/bin/nvf
 cp templates/Vagrantfile.erb $HOME/local/share/nvf/templates/
-cp templates/Gemfile.erb $HOME/local/share/nvf/templates/
