@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
+require 'etc'
 require 'erb'
 
 @default_box_url = "/home/thorsten/.vagrant.d/boxes/baseline.box"
 @base_name = File.basename(Dir.getwd)
+@username = Etc.getlogin
 
 if ARGV[0].to_i > 0 then
   @nboxes = ARGV[0].to_i
