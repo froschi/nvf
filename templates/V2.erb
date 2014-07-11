@@ -1,11 +1,16 @@
+# nvf, run by <%= @username %> at <%= Time.now %>
 box_url = "/home/thorsten/.vagrant.d/boxes/ubuntu-trusty-amd64-20140521.box"
 
 name = File.basename(Dir.pwd)
 chef_recipes = %w/prerequisites/
+settings = {cpus: 1, memory: 512}
 
 Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--ioapic", "on"]
     v.gui = false
+    v.memory = settings.key?(:memory) ? settings[:memory] : 512
+    v.cpus = settings.key?(:cpus) ? settings[:cpus] : 1
   end
   config.vm.define name do |c|
     c.vm.box = name
